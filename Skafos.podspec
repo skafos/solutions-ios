@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.requires_arc        = true
   s.ios.frameworks      = ['UIKit', 'CoreML', 'Foundation']
   s.source              = { :git => "https://github.com/skafos/solutions-ios.git", :tag => s.version.to_s }
-  s.swift_version       = '5.0'
+  s.swift_version       = '5.1.2'
   s.library             = 'z'
   s.vendored_framework  = '**/frameworks/Skafos.framework'
   s.static_framework    = true
