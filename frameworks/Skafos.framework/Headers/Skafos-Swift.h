@@ -182,7 +182,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import Foundation;
-@import UIKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -201,57 +200,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-
-@class NSBundle;
-@class NSCoder;
-
-/// Displays the Skafos Virtual Try On solution!
-SWIFT_CLASS("_TtC6Skafos26VirtualTryOnViewController")
-@interface VirtualTryOnViewController : UIViewController
-- (void)viewDidLoad;
-- (void)viewDidAppear:(BOOL)animated;
-- (void)viewDidDisappear:(BOOL)animated;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class UIImage;
-
-/// Delegate type to customize behavior when the user presses the buy or share buttons.
-SWIFT_PROTOCOL("_TtP6Skafos34VirtualTryOnViewControllerDelegate_")
-@protocol VirtualTryOnViewControllerDelegate
-@optional
-/// Called when the user presses the buy button. Return <code>true</code> to indicate that the SDK should handle
-/// the buy action natively. The implementation of this method is optional and defaults to <code>true</code>.
-/// \param viewController The <code>VirtualTryOnViewController</code> on which the button was pressed.
-///
-/// \param solution The <code>String</code> identifier of the <code>VirtualTryOn</code> solution.
-///
-/// \param product The <code>String</code> identifier of the product tried on.
-///
-/// \param buyURL The <code>URL</code> to purchase the product as bundled in the solution assets.
-///
-///
-/// returns:
-/// Return <code>true</code> to let the SDK handle the buy action. Return <code>false</code> to handle it externally from this method.
-- (BOOL)shouldBuyWithViewController:(VirtualTryOnViewController * _Nonnull)viewController solution:(NSString * _Nonnull)solution product:(NSString * _Nonnull)product buyURL:(NSURL * _Nonnull)buyURL SWIFT_WARN_UNUSED_RESULT;
-/// Called when the user presses the share button. Return <code>true</code> to indicate that the SDK should handle
-/// the share action natively. The implementation of this method is optional and defaults to <code>true</code>.
-/// \param viewController The <code>VirtualTryOnViewController</code> on which the button was pressed.
-///
-/// \param solution The <code>String</code> identifier of the <code>VirtualTryOn</code> solution.
-///
-/// \param product The <code>String</code> identifier of the product tried on.
-///
-/// \param shareURL The <code>URL</code> to purchase the product as bundled in the solution assets.
-///
-/// \param screenshot A <code>UIImage</code> screenshot of the user trying on the product.
-///
-///
-/// returns:
-/// Return <code>true</code> to let the SDK handle the buy action. Return <code>false</code> to handle it externally from this method.
-- (BOOL)shouldShareWithViewController:(VirtualTryOnViewController * _Nonnull)viewController solution:(NSString * _Nonnull)solution product:(NSString * _Nonnull)product shareURL:(NSURL * _Nonnull)shareURL screenshot:(UIImage * _Nonnull)screenshot SWIFT_WARN_UNUSED_RESULT;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

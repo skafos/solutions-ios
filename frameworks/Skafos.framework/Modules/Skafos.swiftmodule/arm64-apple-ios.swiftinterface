@@ -1,27 +1,12 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Skafos
-import ARKit
 import CoreML
 import Foundation
-import SafariServices
-import SceneKit
 @_exported import Skafos
 import Swift
 import UIKit
 import Vision
-final public class VirtualTryOn {
-  final public var identifier: Swift.String {
-    get
-  }
-  final public var version: Swift.Int {
-    get
-  }
-  public static func load(identifier: Swift.String, behavior: Skafos.LoadBehavior = .cachedOrNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Skafos.VirtualTryOn, Skafos.SkafosError>) -> ())
-  final public func reload(behavior: Skafos.LoadBehavior = .checkForNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Swift.Void, Skafos.SkafosError>) -> ())
-  final public func buildViewController() -> Skafos.VirtualTryOnViewController?
-  @objc deinit
-}
 final public class CustomAsset {
   final public var identifier: Swift.String {
     get
@@ -44,6 +29,7 @@ final public class CustomAsset {
 public enum ProductRecommenderOptionKey {
   case reportAnalytics
   case includeInput
+  case ignoreColdStart
   case randomize
   case randomFactor
   case filter
@@ -136,23 +122,6 @@ public struct BundledDownload {
   public let url: Foundation.URL
   public init(type: Skafos.Download.Type, identifier: Swift.String, version: Swift.Int, url: Foundation.URL)
 }
-@objc public protocol VirtualTryOnViewControllerDelegate : AnyObject {
-  @objc optional func shouldBuy(viewController: Skafos.VirtualTryOnViewController, solution: Swift.String, product: Swift.String, buyURL: Foundation.URL) -> Swift.Bool
-  @objc optional func shouldShare(viewController: Skafos.VirtualTryOnViewController, solution: Swift.String, product: Swift.String, shareURL: Foundation.URL, screenshot: UIKit.UIImage) -> Swift.Bool
-}
-@objc public class VirtualTryOnViewController : UIKit.UIViewController {
-  public var solutionIdentifier: Swift.String! {
-    get
-    }
-  public var delegate: Skafos.VirtualTryOnViewControllerDelegate?
-  @objc override dynamic public func viewDidLoad()
-  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
-  @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
-  public func setSelected(product id: Swift.String)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
-}
 public enum LoadBehavior {
   case cachedOrNew
   case checkForNew
@@ -174,6 +143,14 @@ final public class VisualSearch<T> where T : Swift.Decodable {
   final public func reload(behavior: Skafos.LoadBehavior = .checkForNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Swift.Void, Skafos.SkafosError>) -> ())
   final public func find(top n: Swift.Int, similarTo image: UIKit.UIImage, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<[T], Skafos.SkafosError>) -> ())
   @objc deinit
+}
+public enum ProductSimilarityModelOptionKey {
+  case usePopularIndicesForEmptyInput
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: Skafos.ProductSimilarityModelOptionKey, b: Skafos.ProductSimilarityModelOptionKey) -> Swift.Bool
 }
 final public class Skafos {
   public struct OptionKey : Swift.Hashable, Swift.ExpressibleByStringLiteral {
@@ -202,3 +179,5 @@ extension Skafos.Download.Type : Swift.Equatable {}
 extension Skafos.Download.Type : Swift.Hashable {}
 extension Skafos.Download.Type : Swift.RawRepresentable {}
 extension Skafos.LoadBehavior : Swift.Hashable {}
+extension Skafos.ProductSimilarityModelOptionKey : Swift.Equatable {}
+extension Skafos.ProductSimilarityModelOptionKey : Swift.Hashable {}
