@@ -1,0 +1,11 @@
+framework module SkafosVTO {
+  umbrella header "SkafosVTO.h"
+
+  export *
+  module * { export * }
+}
+
+module SkafosVTO.Swift {
+    header "SkafosVTO-Swift.h"
+    requires objc
+}

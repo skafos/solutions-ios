@@ -86,6 +86,7 @@ public enum SkafosError : Swift.Error {
   case invalidImage
   case notSupportedOnThisOSVersion(minimumVersion: Swift.String)
   case notSupportedOnThisDevice(requirement: Swift.String)
+  case requiresPlugin(message: Swift.String)
   case underlying(Skafos.UnderlyingError)
   public var code: Swift.Int {
     get
@@ -144,6 +145,18 @@ final public class VisualSearch<T> where T : Swift.Decodable {
   final public func find(top n: Swift.Int, similarTo image: UIKit.UIImage, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<[T], Skafos.SkafosError>) -> ())
   @objc deinit
 }
+final public class VirtualTryOn {
+  final public var identifier: Swift.String {
+    get
+  }
+  final public var version: Swift.Int {
+    get
+  }
+  public static func load(identifier: Swift.String, behavior: Skafos.LoadBehavior = .cachedOrNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Skafos.VirtualTryOn, Skafos.SkafosError>) -> ())
+  final public func reload(behavior: Skafos.LoadBehavior = .checkForNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Swift.Void, Skafos.SkafosError>) -> ())
+  final public func buildViewController() -> UIKit.UIViewController?
+  @objc deinit
+}
 public enum ProductSimilarityModelOptionKey {
   case usePopularIndicesForEmptyInput
   public var hashValue: Swift.Int {
@@ -170,6 +183,7 @@ final public class Skafos {
   final public class func getAvailableDownloads(callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<[Skafos.Download], Skafos.SkafosError>) -> ())
   final public class func checkForUpdates()
   final public class func recordEvent<T>(name: Swift.String, metadata: T? = nil, startedAt: Foundation.Date = Date(), duration: Foundation.TimeInterval? = 0) where T : Swift.Encodable
+  final public class func _registerExtension(solution: Swift.String)
   final public class func handleEventsForBackgroundURLSession(identifier: Swift.String, completionHandler completion: @escaping () -> Swift.Void)
   @objc deinit
 }
