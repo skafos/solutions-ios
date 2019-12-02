@@ -182,6 +182,7 @@ final public class Skafos {
   final public class func initialize(_ clientKey: Swift.String, options: [Skafos.Skafos.OptionKey : Any] = [:])
   final public class func getAvailableDownloads(callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<[Skafos.Download], Skafos.SkafosError>) -> ())
   final public class func checkForUpdates()
+  final public class func recordEvent(name: Swift.String, startedAt: Foundation.Date = Date(), duration: Foundation.TimeInterval? = 0)
   final public class func recordEvent<T>(name: Swift.String, metadata: T? = nil, startedAt: Foundation.Date = Date(), duration: Foundation.TimeInterval? = 0) where T : Swift.Encodable
   final public class func _registerExtension(solution: Swift.String)
   final public class func handleEventsForBackgroundURLSession(identifier: Swift.String, completionHandler completion: @escaping () -> Swift.Void)

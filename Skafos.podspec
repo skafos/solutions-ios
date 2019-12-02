@@ -13,8 +13,4 @@ Pod::Spec.new do |s|
   s.library             = 'z'
   s.vendored_framework  = '**/frameworks/Skafos.framework'
   s.static_framework    = true
-
-  s.subspec 'VTO' do |ss|
-    ss.vendored_framework  = '**/frameworks/SkafosVTO.framework'
-  end
 end
