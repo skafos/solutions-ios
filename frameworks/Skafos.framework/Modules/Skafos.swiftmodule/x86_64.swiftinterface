@@ -154,7 +154,7 @@ final public class VirtualTryOn {
   }
   public static func load(identifier: Swift.String, behavior: Skafos.LoadBehavior = .cachedOrNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Skafos.VirtualTryOn, Skafos.SkafosError>) -> ())
   final public func reload(behavior: Skafos.LoadBehavior = .checkForNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Swift.Void, Skafos.SkafosError>) -> ())
-  final public func buildViewController() -> UIKit.UIViewController?
+  final public func buildViewController(storyboard: UIKit.UIStoryboard? = nil) -> UIKit.UIViewController?
   @objc deinit
 }
 public enum ProductSimilarityModelOptionKey {

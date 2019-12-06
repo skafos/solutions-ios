@@ -185,6 +185,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreGraphics;
 @import Foundation;
 @import SceneKit;
 @import UIKit;
@@ -209,15 +210,97 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-@class NSBundle;
+@class UIImageView;
 @class NSCoder;
 
+/// Cell to display the product’s preview image in the collection view.
+/// When providing your own custom interface, you must subclass this cell type
+/// and wire it appropriately in your storyboard.
+SWIFT_CLASS("_TtC9SkafosVTO23VirtualTryOnPreviewCell")
+@interface VirtualTryOnPreviewCell : UICollectionViewCell
+/// Displays the preview images of the product.
+/// When providing your own custom interface, please connect this outlet to a <code>UIImageView</code>.
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified imageView;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class ARSCNView;
+@class UICollectionView;
+@class NSBundle;
+
 /// Displays the Skafos Virtual Try On solution!
+/// To create your own custom interface for Virtual Try On, please do the following:
+/// <ol>
+///   <li>
+///     Make your controller a subclass of this controller, <code>VirtualTryOnViewController</code>.
+///   </li>
+///   <li>
+///     Make your preview cell a subclass of the <code>VirtualTryOnPreviewCell</code> type.
+///   </li>
+///   <li>
+///     Create a storyboard whose initial view controller is that controller.
+///   </li>
+/// </ol>
+/// Within the storyboard, you will need to connect to this solution’s code in a few ways, described below.
+/// <ol>
+///   <li>
+///     Connect your UI elements to the outlets provided:
+///   </li>
+/// </ol>
+/// <ul>
+///   <li>
+///     The controller’s <code>sceneView</code> outlet displays the <code>ARKit</code> scene
+///   </li>
+///   <li>
+///     The controller’s <code>collectionView</code> outlet displays the preview images of the products to try on
+///   </li>
+///   <li>
+///     the cell’s <code>imageView</code> outlet displays the preview image
+///   </li>
+/// </ul>
+/// <ol>
+///   <li>
+///     Make sure the preview cell’s reuse identifier is <code>"Preview"</code>
+///   </li>
+///   <li>
+///     Optionally connect to actions to access provided behavior:
+///   </li>
+/// </ol>
+/// <ul>
+///   <li>
+///     <code>closeViewController(_:)</code> to close the experience
+///   </li>
+///   <li>
+///     <code>buy(_:)</code> to initiate the purchasing experience for the currently selected product
+///   </li>
+///   <li>
+///     <code>share(_:)</code> to initiate the sharing experience for the currently selected product
+///   </li>
+/// </ul>
 SWIFT_CLASS("_TtC9SkafosVTO26VirtualTryOnViewController")
 @interface VirtualTryOnViewController : UIViewController
+/// Displays the <code>ARKit</code> scene.
+/// When providing your own custom interface, please connect this outlet to an <code>ARSCNView</code>.
+@property (nonatomic, weak) IBOutlet ARSCNView * _Null_unspecified sceneView;
+/// Displays the preview images of the products to try on.
+/// When providing your own custom interface, please connect this outlet to a <code>UICollectionView</code>.
+@property (nonatomic, weak) IBOutlet UICollectionView * _Null_unspecified collectionView;
+/// :nodoc:
 - (void)viewDidLoad;
+/// :nodoc:
 - (void)viewDidAppear:(BOOL)animated;
+/// :nodoc:
 - (void)viewDidDisappear:(BOOL)animated;
+/// Closes this view controller by calling <code>dismiss</code>.
+/// When providing your own custom interface, you may connect events to this action.
+- (IBAction)closeViewController:(id _Nonnull)sender;
+/// Initiates the purchasing experience for the currently selected product.
+/// When providing your own custom interface, you may connect events to this action.
+- (IBAction)buy:(id _Nonnull)sender;
+/// Initiates the sharing experience for the currently selected product.
+/// When providing your own custom interface, you may connect events to this action.
+- (IBAction)share:(id _Nonnull)sender;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -448,6 +531,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreGraphics;
 @import Foundation;
 @import SceneKit;
 @import UIKit;
@@ -472,15 +556,97 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-@class NSBundle;
+@class UIImageView;
 @class NSCoder;
 
+/// Cell to display the product’s preview image in the collection view.
+/// When providing your own custom interface, you must subclass this cell type
+/// and wire it appropriately in your storyboard.
+SWIFT_CLASS("_TtC9SkafosVTO23VirtualTryOnPreviewCell")
+@interface VirtualTryOnPreviewCell : UICollectionViewCell
+/// Displays the preview images of the product.
+/// When providing your own custom interface, please connect this outlet to a <code>UIImageView</code>.
+@property (nonatomic, weak) IBOutlet UIImageView * _Null_unspecified imageView;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class ARSCNView;
+@class UICollectionView;
+@class NSBundle;
+
 /// Displays the Skafos Virtual Try On solution!
+/// To create your own custom interface for Virtual Try On, please do the following:
+/// <ol>
+///   <li>
+///     Make your controller a subclass of this controller, <code>VirtualTryOnViewController</code>.
+///   </li>
+///   <li>
+///     Make your preview cell a subclass of the <code>VirtualTryOnPreviewCell</code> type.
+///   </li>
+///   <li>
+///     Create a storyboard whose initial view controller is that controller.
+///   </li>
+/// </ol>
+/// Within the storyboard, you will need to connect to this solution’s code in a few ways, described below.
+/// <ol>
+///   <li>
+///     Connect your UI elements to the outlets provided:
+///   </li>
+/// </ol>
+/// <ul>
+///   <li>
+///     The controller’s <code>sceneView</code> outlet displays the <code>ARKit</code> scene
+///   </li>
+///   <li>
+///     The controller’s <code>collectionView</code> outlet displays the preview images of the products to try on
+///   </li>
+///   <li>
+///     the cell’s <code>imageView</code> outlet displays the preview image
+///   </li>
+/// </ul>
+/// <ol>
+///   <li>
+///     Make sure the preview cell’s reuse identifier is <code>"Preview"</code>
+///   </li>
+///   <li>
+///     Optionally connect to actions to access provided behavior:
+///   </li>
+/// </ol>
+/// <ul>
+///   <li>
+///     <code>closeViewController(_:)</code> to close the experience
+///   </li>
+///   <li>
+///     <code>buy(_:)</code> to initiate the purchasing experience for the currently selected product
+///   </li>
+///   <li>
+///     <code>share(_:)</code> to initiate the sharing experience for the currently selected product
+///   </li>
+/// </ul>
 SWIFT_CLASS("_TtC9SkafosVTO26VirtualTryOnViewController")
 @interface VirtualTryOnViewController : UIViewController
+/// Displays the <code>ARKit</code> scene.
+/// When providing your own custom interface, please connect this outlet to an <code>ARSCNView</code>.
+@property (nonatomic, weak) IBOutlet ARSCNView * _Null_unspecified sceneView;
+/// Displays the preview images of the products to try on.
+/// When providing your own custom interface, please connect this outlet to a <code>UICollectionView</code>.
+@property (nonatomic, weak) IBOutlet UICollectionView * _Null_unspecified collectionView;
+/// :nodoc:
 - (void)viewDidLoad;
+/// :nodoc:
 - (void)viewDidAppear:(BOOL)animated;
+/// :nodoc:
 - (void)viewDidDisappear:(BOOL)animated;
+/// Closes this view controller by calling <code>dismiss</code>.
+/// When providing your own custom interface, you may connect events to this action.
+- (IBAction)closeViewController:(id _Nonnull)sender;
+/// Initiates the purchasing experience for the currently selected product.
+/// When providing your own custom interface, you may connect events to this action.
+- (IBAction)buy:(id _Nonnull)sender;
+/// Initiates the sharing experience for the currently selected product.
+/// When providing your own custom interface, you may connect events to this action.
+- (IBAction)share:(id _Nonnull)sender;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
