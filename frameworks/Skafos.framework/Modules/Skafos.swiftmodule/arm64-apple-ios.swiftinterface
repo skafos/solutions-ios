@@ -73,6 +73,36 @@ public struct LifecycleOptions : Swift.OptionSet {
   public typealias ArrayLiteralElement = Skafos.LifecycleOptions
   public typealias RawValue = Swift.Int
 }
+public struct ObjectObservation {
+  public let label: Swift.String
+  public let confidence: Swift.Double
+  public let boundingBox: CoreGraphics.CGRect
+}
+public enum ObjectDetectorOptionKey {
+  case orientation
+  case useCPUOnly
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: Skafos.ObjectDetectorOptionKey, b: Skafos.ObjectDetectorOptionKey) -> Swift.Bool
+}
+final public class ObjectDetector {
+  public typealias DetectionCompletionHandler = (Swift.Result<[Skafos.ObjectObservation], Skafos.SkafosError>) -> ()
+  final public var identifier: Swift.String {
+    get
+  }
+  final public var version: Swift.Int {
+    get
+  }
+  public static func load(identifier: Swift.String, behavior: Skafos.LoadBehavior = .cachedOrNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Skafos.ObjectDetector, Skafos.SkafosError>) -> ())
+  final public func reload(behavior: Skafos.LoadBehavior = .checkForNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Swift.Void, Skafos.SkafosError>) -> ())
+  final public func detect(image: UIKit.UIImage, options: [Skafos.ObjectDetectorOptionKey : Any] = [:], callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping Skafos.ObjectDetector.DetectionCompletionHandler)
+  final public func detect(image: CoreGraphics.CGImage, options: [Skafos.ObjectDetectorOptionKey : Any] = [:], callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping Skafos.ObjectDetector.DetectionCompletionHandler)
+  final public func detect(image: CoreImage.CIImage, options: [Skafos.ObjectDetectorOptionKey : Any] = [:], callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping Skafos.ObjectDetector.DetectionCompletionHandler)
+  final public func detect(buffer: CoreVideo.CVPixelBuffer, options: [Skafos.ObjectDetectorOptionKey : Any] = [:], callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping Skafos.ObjectDetector.DetectionCompletionHandler)
+  @objc deinit
+}
 public struct UnderlyingError {
   public let code: Swift.Int
   public let wrapped: Swift.Error?
@@ -190,6 +220,8 @@ final public class Skafos {
 }
 extension Skafos.ProductRecommenderOptionKey : Swift.Equatable {}
 extension Skafos.ProductRecommenderOptionKey : Swift.Hashable {}
+extension Skafos.ObjectDetectorOptionKey : Swift.Equatable {}
+extension Skafos.ObjectDetectorOptionKey : Swift.Hashable {}
 extension Skafos.Download.Type : Swift.Equatable {}
 extension Skafos.Download.Type : Swift.Hashable {}
 extension Skafos.Download.Type : Swift.RawRepresentable {}
