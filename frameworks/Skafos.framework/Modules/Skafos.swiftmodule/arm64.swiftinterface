@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
 // swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Skafos
 import CoreML
 import Foundation
@@ -7,7 +7,7 @@ import Foundation
 import Swift
 import UIKit
 import Vision
-final public class CustomAsset {
+@_hasMissingDesignatedInitializers final public class CustomAsset {
   final public var identifier: Swift.String {
     get
   }
@@ -40,7 +40,7 @@ public enum ProductRecommenderOptionKey {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
-final public class ProductRecommender<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Hashable {
+@_hasMissingDesignatedInitializers final public class ProductRecommender<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Hashable {
   final public var identifier: Swift.String {
     get
   }
@@ -53,14 +53,14 @@ final public class ProductRecommender<T> where T : Swift.Decodable, T : Swift.En
   final public func recommend(top n: Swift.Int, from input: [T], options: [Skafos.ProductRecommenderOptionKey : Any] = [:], callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<[T], Skafos.SkafosError>) -> ()) -> Skafos.ProductRecommendation<T>
   @objc deinit
 }
-public class ProductRecommendation<T> : ObjectiveC.NSObject where T : Swift.Encodable {
+@_hasMissingDesignatedInitializers public class ProductRecommendation<T> : ObjectiveC.NSObject where T : Swift.Encodable {
   public var result: Swift.Result<[T], Skafos.SkafosError>? {
     get
   }
   public func recordEvent(name: Swift.String, products: [T], startedAt: Foundation.Date = Date(), duration: Foundation.TimeInterval? = 0)
   public func recordEvent<U>(name: Swift.String, products: [T], metadata: U? = nil, startedAt: Foundation.Date = Date(), duration: Foundation.TimeInterval? = 0) where U : Swift.Encodable
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public struct LifecycleOptions : Swift.OptionSet {
   public let rawValue: Swift.Int
@@ -81,13 +81,13 @@ public struct ObjectObservation {
 public enum ObjectDetectorOptionKey {
   case orientation
   case useCPUOnly
+  public static func == (a: Skafos.ObjectDetectorOptionKey, b: Skafos.ObjectDetectorOptionKey) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: Skafos.ObjectDetectorOptionKey, b: Skafos.ObjectDetectorOptionKey) -> Swift.Bool
 }
-final public class ObjectDetector {
+@_hasMissingDesignatedInitializers final public class ObjectDetector {
   public typealias DetectionCompletionHandler = (Swift.Result<[Skafos.ObjectObservation], Skafos.SkafosError>) -> ()
   final public var identifier: Swift.String {
     get
@@ -140,7 +140,7 @@ public struct Download : Swift.Codable {
       get
     }
   }
-  public let type: Skafos.Download.Type
+  public let type: Skafos.Download.`Type`
   public let identifier: Swift.String
   public let name: Swift.String
   public let kind: Swift.String?
@@ -151,7 +151,7 @@ public struct Download : Swift.Codable {
 public struct BundledDownload {
   public let download: Skafos.Download
   public let url: Foundation.URL
-  public init(type: Skafos.Download.Type, identifier: Swift.String, version: Swift.Int, url: Foundation.URL)
+  public init(type: Skafos.Download.`Type`, identifier: Swift.String, version: Swift.Int, url: Foundation.URL)
 }
 public enum LoadBehavior {
   case cachedOrNew
@@ -163,7 +163,7 @@ public enum LoadBehavior {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
-final public class VisualSearch<T> where T : Swift.Decodable {
+@_hasMissingDesignatedInitializers final public class VisualSearch<T> where T : Swift.Decodable {
   final public var identifier: Swift.String {
     get
   }
@@ -175,37 +175,25 @@ final public class VisualSearch<T> where T : Swift.Decodable {
   final public func find(top n: Swift.Int, similarTo image: UIKit.UIImage, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<[T], Skafos.SkafosError>) -> ())
   @objc deinit
 }
-final public class VirtualTryOn {
-  final public var identifier: Swift.String {
-    get
-  }
-  final public var version: Swift.Int {
-    get
-  }
-  public static func load(identifier: Swift.String, behavior: Skafos.LoadBehavior = .cachedOrNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Skafos.VirtualTryOn, Skafos.SkafosError>) -> ())
-  final public func reload(behavior: Skafos.LoadBehavior = .checkForNew, callbackQueue queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Swift.Void, Skafos.SkafosError>) -> ())
-  final public func buildViewController(storyboard: UIKit.UIStoryboard? = nil) -> UIKit.UIViewController?
-  @objc deinit
-}
 public enum ProductSimilarityModelOptionKey {
   case usePopularIndicesForEmptyInput
+  public static func == (a: Skafos.ProductSimilarityModelOptionKey, b: Skafos.ProductSimilarityModelOptionKey) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: Skafos.ProductSimilarityModelOptionKey, b: Skafos.ProductSimilarityModelOptionKey) -> Swift.Bool
 }
-final public class Skafos {
+@_hasMissingDesignatedInitializers final public class Skafos {
   public struct OptionKey : Swift.Hashable, Swift.ExpressibleByStringLiteral {
     public static let lifecycleOptions: Skafos.Skafos.OptionKey
     public static let bundledDownloads: Skafos.Skafos.OptionKey
     public init(stringLiteral: Swift.String)
+    public typealias StringLiteralType = Swift.String
     public var hashValue: Swift.Int {
       get
     }
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: Skafos.Skafos.OptionKey, b: Skafos.Skafos.OptionKey) -> Swift.Bool
-    public typealias StringLiteralType = Swift.String
     public typealias ExtendedGraphemeClusterLiteralType = Swift.String
     public typealias UnicodeScalarLiteralType = Swift.String
   }
@@ -222,9 +210,10 @@ extension Skafos.ProductRecommenderOptionKey : Swift.Equatable {}
 extension Skafos.ProductRecommenderOptionKey : Swift.Hashable {}
 extension Skafos.ObjectDetectorOptionKey : Swift.Equatable {}
 extension Skafos.ObjectDetectorOptionKey : Swift.Hashable {}
-extension Skafos.Download.Type : Swift.Equatable {}
-extension Skafos.Download.Type : Swift.Hashable {}
-extension Skafos.Download.Type : Swift.RawRepresentable {}
+extension Skafos.Download.`Type` : Swift.Equatable {}
+extension Skafos.Download.`Type` : Swift.Hashable {}
+extension Skafos.Download.`Type` : Swift.RawRepresentable {}
+extension Skafos.LoadBehavior : Swift.Equatable {}
 extension Skafos.LoadBehavior : Swift.Hashable {}
 extension Skafos.ProductSimilarityModelOptionKey : Swift.Equatable {}
 extension Skafos.ProductSimilarityModelOptionKey : Swift.Hashable {}
